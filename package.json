@@ -28,7 +28,7 @@
             "properties": {
                 "clang-tidy.executable": {
                     "type": "string",
-                    "default": "/Users/urazoff/llvm-project/build/bin/clang-tidy",
+                    "default": "clang-tidy",
                     "description": "Path to the clang-tidy executable"
                 }
             }
