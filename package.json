@@ -3,7 +3,7 @@
 	"displayName": "clang-tidy",
 	"description": "clang-tidy checker",
 	"version": "0.0.1",
-    "publisher": "dilshod",
+	"publisher": "dilshod",
 	"engines": {
 		"vscode": "^1.56.0"
 	},
