@@ -45,8 +45,10 @@ export default class ClangTidy {
     }
 
     const executablePath = workspace.getConfiguration("clang-tidy").get("executable") as string;
+    const checks = workspace.getConfiguration("clang-tidy").get("checks") as Array<string>;
 
-    let child = require('child_process').execFile(executablePath, [document.fileName], (error: { code: string; }, data: string) => {
+    let child = require('child_process').execFile(executablePath, [`--checks=${checks.join(",")}`, document.fileName], (error: {
+        code: string; }, data: string) => {
         if(error) {
           console.log(data);
             if (error.code === "ENOENT") {

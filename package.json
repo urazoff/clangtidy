@@ -30,6 +30,11 @@
                     "type": "string",
                     "default": "clang-tidy",
                     "description": "Path to the clang-tidy executable"
+                },
+                "clang-tidy.checks": {
+                    "type": "array",
+                    "default": ["misc-ref-init-assign"],
+                    "description": "List of globs"
                 }
             }
         }
