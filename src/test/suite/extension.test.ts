@@ -32,20 +32,29 @@ suite("Extension Test Suite", () => {
         const tidy = < vscode.Extension < any >> (
             vscode.extensions.getExtension("dilshod.clangtidy")
         );
+
         const testpath = __dirname + "/test.cpp";
         require("fs").writeFile(testpath, tolint, (err: any) => {
             if (err) throw err;
         });
+
         const document = await vscode.workspace.openTextDocument(testpath);
         const editor = await vscode.window.showTextDocument(document);
+
         vscode.commands.executeCommand("clangtidy.checkCode");
         await sleep(5000);
+
         const diagnostics = vscode.languages.getDiagnostics(editor.document.uri);
+
         assert.strictEqual(tidy.isActive, true, "Extension should be activated");
-        assert.strictEqual(diagnostics.length, 1);
-        assert.strictEqual(
-            diagnostics[0].message,
-            " reference type variable 'RefOne' is assigned after initialization  : [misc-ref-init-assign]"
-        );
+
+        const msg = " reference type variable 'RefOne' is assigned after initialization  : [misc-ref-init-assign]";
+        let count = 0;
+
+        diagnostics.forEach( (element) => {
+            if (!element.message.localeCompare(msg)) count++;
+        });
+
+        assert.strictEqual(count, 1);
     });
 });
