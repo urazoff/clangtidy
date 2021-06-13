@@ -40,6 +40,8 @@ export default class ClangTidy {
   * @param TextDocument : Current document
   */
   public async lint(document: TextDocument) {
+    this.clear(document);
+
     if (!["cpp", "c"].includes(document.languageId)) {
         return;
     }
